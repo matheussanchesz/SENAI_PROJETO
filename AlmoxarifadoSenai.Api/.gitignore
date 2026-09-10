@@ -1,4 +1,4 @@
-## Core dotnet GitIgnore
+    ## Core dotnet GitIgnore
 # Pasta de compilação e artefatos de saída (Crucial!)
 bin/
 obj/

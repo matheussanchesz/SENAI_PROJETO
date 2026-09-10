@@ -10,7 +10,6 @@ import {
   FiChevronRight,
   FiClipboard,
   FiFileText,
-  FiGrid,
   FiHome,
   FiLogOut,
   FiMoon,
@@ -266,17 +265,6 @@ export default function Sidebar() {
           </div>
 
           <nav className="sidebar-menu">
-            <button
-              type="button"
-              className="sidebar-programas"
-              onClick={trocarPrograma}
-              title="Escolher programa"
-              aria-label="Voltar para a escolha de programas"
-            >
-              <FiArrowLeft />
-              <span>Voltar</span>
-            </button>
-
             {itensPermitidos.map((item) => (
               <NavLink
                 key={item.titulo}
@@ -309,52 +297,60 @@ export default function Sidebar() {
           {sidebarRecolhida ? <FiChevronRight /> : <FiChevronLeft />}
         </button>
 
-        <div className="sidebar-user-wrapper">
+        <div className="sidebar-footer">
           <button
             type="button"
-            className="sidebar-user"
-            onClick={() => setMenuUsuarioAberto((estadoAtual) => !estadoAtual)}
-            aria-expanded={menuUsuarioAberto}
+            className="sidebar-programas"
+            onClick={trocarPrograma}
+            title="Escolher programa"
+            aria-label="Voltar para a escolha de programas"
           >
-            <div className="avatar">{gerarIniciais(usuario.nome)}</div>
-
-            <div className="sidebar-user-info">
-              <strong>{usuario.nome}</strong>
-              <span>{usuario.perfil}</span>
-            </div>
-
-            <FiChevronDown
-              className={`sidebar-user-arrow ${
-                menuUsuarioAberto ? "aberto" : ""
-              }`}
-            />
+            <FiArrowLeft />
+            <span>Voltar</span>
           </button>
 
-          {menuUsuarioAberto && (
-            <div className="sidebar-user-menu">
-              <button type="button" onClick={trocarPrograma}>
-                <FiGrid />
-                Trocar programa
-              </button>
+          <div className="sidebar-user-wrapper">
+            <button
+              type="button"
+              className="sidebar-user"
+              onClick={() => setMenuUsuarioAberto((estadoAtual) => !estadoAtual)}
+              aria-expanded={menuUsuarioAberto}
+            >
+              <div className="avatar">{gerarIniciais(usuario.nome)}</div>
 
-              {usuario.perfil !== "Coordenador" && (
-                <button type="button" onClick={() => void abrirEdicaoPerfil()}>
-                  <FiUser />
-                  Editar meus dados
+              <div className="sidebar-user-info">
+                <strong>{usuario.nome}</strong>
+                <span>{usuario.perfil}</span>
+              </div>
+
+              <FiChevronDown
+                className={`sidebar-user-arrow ${
+                  menuUsuarioAberto ? "aberto" : ""
+                }`}
+              />
+            </button>
+
+            {menuUsuarioAberto && (
+              <div className="sidebar-user-menu">
+                {usuario.perfil !== "Coordenador" && (
+                  <button type="button" onClick={() => void abrirEdicaoPerfil()}>
+                    <FiUser />
+                    Editar meus dados
+                  </button>
+                )}
+
+                <button type="button" onClick={alternarModoEscuro}>
+                  <FiMoon />
+                  Modo escuro
                 </button>
-              )}
 
-              <button type="button" onClick={alternarModoEscuro}>
-                <FiMoon />
-                Modo escuro
-              </button>
-
-              <button type="button" className="sair" onClick={sairDaConta}>
-                <FiLogOut />
-                Sair da conta
-              </button>
-            </div>
-          )}
+                <button type="button" className="sair" onClick={sairDaConta}>
+                  <FiLogOut />
+                  Sair da conta
+                </button>
+              </div>
+            )}
+          </div>
         </div>
       </aside>
 
